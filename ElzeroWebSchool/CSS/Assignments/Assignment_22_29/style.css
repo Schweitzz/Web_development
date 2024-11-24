@@ -1,0 +1,84 @@
+div.parent{
+    padding: 20px;
+    border: 1px solid green;
+}
+
+div.parent p.child{
+    padding: inherit;
+    border: inherit;
+}
+
+.elzero{
+    text-transform: capitalize;
+    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.text-size1{
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+.text-size2{
+    text-align: center;
+    font-size: 2rem;
+}
+
+.text-size3{
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.container{
+    background-color: #EEE;
+    overflow: hidden;
+    margin: 0px auto;
+    width: 800px;
+}
+
+.container>*{
+    background-color: #D5D5D5;
+    text-align: center;
+    margin: 15px 0px 0 0;
+    margin-left: 7.5px;
+}
+.full-width{
+    width: 100%; 
+    float: left;
+}
+
+.third{
+    width: calc((100% - (7.5px *5 )) / 3);
+    float:left ;
+}
+
+.half{
+    width: calc((100% - (7.5px*4))/2);
+    float:left ;
+}
+
+.fourth{
+    width: calc((100% - (7.5px*6))/4);
+    float:left ;
+}
+/*only the child elements of th container with float property will wrap into one line*/
+/*calc is some how sensitve so you should write it with spaces between the operand and the operator*/
+
+div.normal ,.one ,.two{
+    margin: 20px auto;
+    width: 300px;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 20px;
+    background-color: #B3B3B3; /* Get The Background From Image */
+    color: black;
+  }
+
+  .one{
+    background-color: rgba( 179, 179, 179, 0.1);
+  }
+
+  .two{
+    opacity: 0.1;
+  }

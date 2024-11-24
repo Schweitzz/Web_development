@@ -1,0 +1,17 @@
+javascript has the syntactic sugar so you can write more clear number ex 1_000_000 and no problem with interpetion
+Number() is a function not casting and it has some macros
+what is meant by double presion is that js considers all numbers to be of type double
+
+.toString() and .toFixed return a string and the number is written before them 
+parseInt is a function like number but it can extract the number from the words
+you can turn a string into a number by Number or parse or +
+for instance methods you can use double dots instead of brackets this is only with number to ignore the floating point
+you can't chain the Math methods also you can't use it without the class name 
+
+min and max can take multiple arguments 
+
+a variable with given value as string is char array and can be accessed with indexing 
+when you try to access an outer element of the array it will give undefined bur methods like .charAt you don't know the behavior but here it 
+returns blank which actually can also mean space
+you can chain your methods
+split returns an array where other methods return a string

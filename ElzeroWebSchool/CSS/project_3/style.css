@@ -1,0 +1,35 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div{
+    color: red;
+}
+
+div.tt{                   /*there is some problem with inheritance from a paragraph*/
+    color: blue;
+}
+
+h2.test{
+    color: inherit;
+}
+
+div.testy{
+    color: inherit;
+}
+
+div.parent{
+    padding: 10px;
+    border: 2px solid red;
+    overflow: hidden;/*essential to keep every thing in place*/
+}
+
+div.parent> div{
+    /*display: inline-block;*/ /*now you don't need inline block */
+    width: 15%;   /*what i have achieved here that the width is 25% of the container even tho the padding all of this because of float*/
+    float: left;
+}
+
+p{
+    display: inline;
+}

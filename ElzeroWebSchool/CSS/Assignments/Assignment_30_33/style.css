@@ -1,0 +1,75 @@
+div.green,
+div.red,
+div.blue,
+div.black {
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
+.green {
+  background-color: #009688;
+  top: 240px;
+  left: 40px;
+  z-index: 2;
+}
+
+.red {
+  background-color: #f44336;
+  left: 60px;
+  top: 160px;
+  z-index: 3;
+}
+
+.blue {
+  background-color: #03a9f4;
+  top: 20px;
+  left: 20px;
+}
+
+.black {
+  background-color: black;
+  left: 20px;
+  bottom: 60px;
+  z-index: -1;
+}
+
+.container {
+  width: 400px;
+  margin: 0 auto;
+  background-color: #ededed;
+  position: relative;
+  border: 1px solid;
+  border-color: red #2196f3;
+  text-align: center;
+}
+
+.top-left,
+.bottom-left,
+.top-right,
+.bottom-right {
+  position: absolute;
+  background-color: #2196f3;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  color: white;
+}
+.top-left {
+  top: -10px;
+  left: -10px;
+}
+
+.bottom-left {
+  bottom: -10px;
+  left: -10px;
+}
+
+.top-right {
+  top: -10px;
+  right: -10px;
+}
+
+.bottom-right {
+  bottom: -10px;
+  right: -10px;
+}

@@ -1,0 +1,5 @@
+it's best to put the script element in the end of body element as to wait for all other elements to load or you can always use events like window.onload
+
+window document and console are the basic objects for any page 
+
+console is not part of the js language it's just an api to deal with the console on the browser

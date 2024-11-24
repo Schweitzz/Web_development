@@ -1,0 +1,97 @@
+it's not a good practice to use an id for styling with css
+
+don't use inline css as you may not have the access to change in the html document or template
+also use an external file for the css and it's best to be in a folder as they might be multiple css files
+
+use the kebab-case naming convention for css 
+you may use multiple css files because you may use libraries also you may use rtl files for different languages
+
+properties in css has default values
+
+if you want to write multiple propery values in one value like instead of padding top and etc you only write padding you can know it from the browser
+padding doesn't allow negative values
+
+auto value for margin doesn't center top or bottom 
+
+you have to specify the three values for the border so it can be displaied type color size
+
+outline is not considered with the element size width or height and don't follow the margin also you can't customize it in the different directoins\
+
+inline displaying have only padding and margin in right and left for padding top and bottom may have an effect but it's not working properly so 
+set it to zero 
+
+inline block is the best as you can specify PMWH but still elements will be beside each other
+
+display none is like the hidden attribute of the HTML and a use case is that you can show content when action happen with js as it changes the display value
+
+visibilty hidden differ from them that the element still have its space taken while being hidden unlike the other two
+
+you group classes with commas
+
+for design you can always use max or min width or height etc. also width:fit-content;
+
+overflow is important for design and the best value for it is auto you can also make overflow-x hidden so to prevent scrolling horizontly 
+with phone 
+
+you know the direction of the text by the dot at the end
+
+text decoration none is used alot with links to delete the line
+as we said it's best to make the style with css not using html attributes but also don't use the text elements with html or don't write 
+the text in Uppercase for example just do it with the css
+
+as the link is considered one work it can break the width horizatolly so use word break also the link breaks at special char not includeing
+_ or -
+
+/*********************/
+for text you can have color shadow align direction vertical align decoration transformation spacing_with_multiple_stuff  indent  word break
+overflow and text-overflow
+/****************/
+
+you can inherrit from your parent element the properity you specify also by defualt some properties get inherrited and other get overwritten 
+by the values of this property given for the element
+
+you have to use a safe web font
+you can categorize the fonts into two types with syrif or without and there are fonts for each
+items inherit from its nearest parent and idk what is the problem with the p
+
+em is relative to the parent
+rem takes from the root element of websites which is the html element
+
+/****************/
+for font you have font family style varient weight
+if you have italic or bold and you want to retrieve it use font weight normal 
+the weigt of the font depends on the type of the font as not all fonts support all fonts 
+
+when you float elements they are no longer calculated or seen from the parent container as they folat so when you overflow hidden they kinda return
+to the calculation as hidden cuts them from going out so the conatiner contain them again
+there are to ways to solve the float problem clear is hard so just use overflow
+
+###########imp note by default the user agent gives body margin of 8px
+you have n elements the no of spaces between them is n-1 and the no of total spaces is n+1
+calc is just amazing
+
+opacity works like alpha but for all the content not just the background color
+
+this notes are for videos from 0 to 29
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.

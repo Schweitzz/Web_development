@@ -1,0 +1,64 @@
+div.parent span.title{
+    color: blue;
+}
+
+div.child span.title{
+    color: red;
+}
+
+div>p{
+    color: green;
+}
+
+div.title{
+    color: green;
+}
+
+div>p ,div.title{
+    color: violet;
+}
+
+.box{
+    background-color: red;
+    padding: 5px;
+    max-width: 200px;
+    max-height: 80px;
+    margin: 10px;
+    overflow: hidden;
+}
+
+.shadow{
+    text-transform: capitalize;
+    text-shadow: 0.5px 0.5px 0 orange ,1px 1px 0 purple, 1.5px 1.5px 0 blue; /*now would you look at that*/
+}
+
+.one, .two, .three{
+    text-align: center;
+}
+
+.one{
+    text-transform: uppercase;
+}
+
+.two{
+    text-transform:capitalize;
+}
+
+.test{
+    background-color: #E5E5E5;
+    width: 400px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+a{
+    display: block;
+    text-align: center;
+    width: 50px;
+    height: 20px;
+    text-decoration: none;
+    background-color: aquamarine;
+    color: white;
+    margin: 0 auto ;
+}

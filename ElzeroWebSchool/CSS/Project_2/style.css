@@ -1,0 +1,43 @@
+div{
+   /* width: 100px;          /*first you have to give the div a width rather than the 100% so it can be centered*/
+    /*height: 50px ;
+    margin: auto ;*/
+    border: 1px solid black;
+
+}
+
+.first{
+    /* visibility: hidden; */
+    color: antiquewhite;
+    text-shadow: 1px 1px 1px red;
+}
+
+.second{
+    color: aqua;
+}
+
+.third{
+    color: red;
+}
+
+.first,.second,.third{
+    padding: 20px;
+}
+
+#t , #tt{ /*grouping can also be applied for ids*/
+    background-color: brown;
+}
+
+div p.special{ /*look at what i have done here*/
+    background-color: aquamarine;
+}
+
+.width{
+    display: inline-block;
+    /*width:fit-content ;*/
+    width: 400px;
+    max-height: 200px;
+    overflow: auto;
+    text-shadow: 1px 0 0 rgb(22, 222, 152,0.28) ; /*don't forget the px in the arguments*/
+    color: rgba(22, 33, 44, 35%);  /*remember rgba is the one that have the alpha rgb also work but not best practice*/
+}

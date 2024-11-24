@@ -1,0 +1,100 @@
+/*style element is html*/
+/*this is a comment in css and i can't be more happy to see this syntax again oh wow*/
+h1{
+    color: bisque;
+}
+body{
+    background-color: black;
+    color: azure;
+    background-image: url(pic2.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.color{
+    color:brown;
+}
+.uppercase{
+    text-transform: capitalize;
+}
+#test{
+    color: rgb(122,100,180); /*rgba*/
+}
+div,h2,p{
+    color: beige;
+}
+div p i{
+    text-transform: uppercase;
+    color: #ff00ff; /*trying the colors with the # iam so happy with this commenting hala C/C++*/
+}
+/*link states styling */
+a:link{
+    color:darkgoldenrod
+}
+a:active{
+    color:green /*for some reason active is not working for me probably it doesn't work on edge*/
+}
+a:hover{
+    color:darkcyan
+}
+a:visited{
+    color:red
+}
+#dave{
+    background-image: url(pic.jpg);
+    /*background-image: url(pic2.jpg); just wanted to see what would happen*/
+    background-size: contain;
+    height:500px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    
+}
+h1#intro{
+    text-align: center;
+}
+div p#try , div p.ttry{                          /*so as you can see here you can nest with an id or class also you can combine the nested elements*/
+    /*it gives an error just for the unknown word but it works just fine*/
+    color:rgb(80, 80, 255);
+    text-align: center;
+}
+.border1{
+    border: 1px solid white;
+    border-radius: 5px;
+    border-bottom-style: dashed;
+    text-align: center;
+}
+div#div1 ,div#div2{
+    display:inline-block;
+    border: 1px solid white;
+    border-radius: 5%;
+    width: 200px;
+    height: 200px;
+}
+div.try_block{  /*you can't change the width of a block*/ /*also notice the the first one started a new line*/
+    width: 500px;
+    display: block;
+    border: white 1px solid;
+}
+#leaf{
+    width: 200px;
+    height: 200px;
+    border-radius: 0 50% 0 50%;
+    background-image: url(pic2.jpg);
+    box-shadow: 5px 5px 5px 5px white; /*the fourth number gives the top and left shadows too*/
+    background-size: contain;
+    background-repeat: no-repeat;
+    
+}
+#boxy{
+    border: 2px white dashed;
+    width: 200px;
+    height: 200px;
+    padding: 20px; /*padding doesn't have an auto option*/
+   display: block;
+    margin: 50px auto 50px auto;  /*the margin and the padding are as follows top right bottom and left*/
+    text-align: center;
+    color: azure;
+    opacity: 0.5;
+    background-color: rgb(22, 51, 51);
+    
+}
+

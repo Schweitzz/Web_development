@@ -1,0 +1,58 @@
+when google consider your website it only look at the head tag and its content
+meta is a self closing tag and is in the head as it provides information about the website
+<script>: Includes or links to JavaScript files. Scripts in the <head> often include analytics, site settings, or critical scripts that need to run before the page is fully loaded.
+meta is also useful for SEO 
+most meta tags consists of content and name and the most famous names are description, keywords, charset, viewport, robot
+
+DOCTYPE is an instruction for the browser so it can render your website in standard mode not quirks mode and it's nessary without it some tags may not work as expected 
+
+you should have only one H1 element in your browser so to be SEO friendly
+
+hidden is a html global attribute that hide the element it's also a value for the display property in css
+
+strong is the same as bold but it's bold for the sake of important text it also helps SEO
+em is the same as i element the same difference as bold and strong
+it's not recommeneded to delete and overwirte the content regullary so not SEO unfriendly so use del element
+
+if you don't put https: this means that the file is not on the internet so the engine search in the directory of the current folder
+same goes for mailto keyword that make you go to the email
+
+lists have attributes such reversed start and type
+
+span is used to isolate part of the content
+
+######very imp div is a container for other elements so you can handle them right you put text in p not in div you put elements in div so the page
+is sectionized and you can apply css for all the elements in a specific div 
+
+in modern html don't just use div inside a div and etc no you use tags which are divs but with other names like nav header footer section aside article figure figcaption
+
+
+search on design architecture with html and like how to use list to make tabs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.

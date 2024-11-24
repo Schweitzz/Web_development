@@ -1,0 +1,10 @@
+/** idk how this is possible like the property window.osama shouldn't exist and output was not defined right?*/
+let osama = 10;
+console.log(window.osama);
+
+you can't chain the Math methods also you can't use it without the class name 
+
+getPropertiesNames 
+more array methods 
+review strings method 
+object methods

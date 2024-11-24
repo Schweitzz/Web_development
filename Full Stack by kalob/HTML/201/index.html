@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML 201</title>
+    <link rel="shortcut icon" href="Goofy C2C.jpeg" type="image/jpeg">
+</head>
+<body>
+    <h1 id="Top">This the Website</h1>
+    <a href="#Bottom">Go to bottom</a>
+    <p><span style="text-decoration: underline;">Lorem, ipsum dolor sit amet consectetur</span> <u>adipisicing elit. Voluptates,</u> ex totam nemo tenetur, doloribus 
+        autem eligendi quos consequatur blanditiis culpa fugiat nobis, 
+        deserunt neque voluptas similique necessitatibus maxime beatae non?</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate placeat distinctio nesciunt doloremque dicta a illum corrupti numquam, optio, aspernatur fugiat dolorem dolore cum consequatur magni nulla adipisci praesentium dolor!</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate placeat distinctio nesciunt doloremque dicta a illum corrupti numquam, optio, aspernatur fugiat dolorem dolore cum consequatur magni nulla adipisci praesentium dolor!</p>
+    
+    
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate placeat distinctio nesciunt doloremque dicta a illum corrupti numquam, optio, aspernatur fugiat dolorem dolore cum consequatur magni nulla adipisci praesentium dolor!</p>
+    <div id="Bottom">
+        <a href="#Top">Go to top</a>
+    </div>
+    <ul>
+        <li>number 1 </li>
+        <li>number 2 </li>
+        <li>number 3 </li>
+        <li>number 4 </li>
+    </ul>
+    <img src="Pathing/andrea-de-santis-rolK4sMMw28-unsplash (1).jpg" alt="Show" width="500">  <!--pathing either the reverse pathing or the relative pathing-->
+    <table border="5" width="100%">
+        <tr border="5">        <!--border just work for the table element-->
+            <td>cell 11 </td>
+            <td>cell 12</td>
+            <td>cell 13</td>
+            <td>cell 14</td>
+            <td>cell 15</td>
+            <td>cell 16</td>
+        </tr>
+        <tr>
+            <td>cell 21 </td>
+            <td>cell 22</td>
+            <td>cell 23</td>
+            <td>cell 24</td>
+            <td>cell 25</td>
+            <td>cell 26</td>
+        </tr>
+
+        <table border="1" width="100%">
+            <tbody>
+                <tr>
+                    <td rowspan="4" width="5%">1</td>
+                    <td colspan="3">2</td>
+                </tr>
+                <tr>
+                    
+                    <td width="20%">2</td>
+                    <td width="30%">3</td>
+                    <td width="40%">4</td>
+                </tr>
+                <tr>
+                    
+                    <td>2</td>
+                    <td>3</td>
+                    <!-- <td>4</td> -->                   <!--so tables in general try to allign the elements-->
+                    <!-- <td width="5%">5</td> -->
+                </tr>
+                
+                <tr>
+                    
+                    <td colspan="3">2</td>
+                </tr>
+                <table border="1" width="100%">
+                    <th colspan="3">This is my table</th>
+                    <tbody>
+                        
+                        <tr>
+                            <td><h1>class 1 </h1></td>
+                            <td><h1>class 2 </h1></td>
+                            <td><h1>class 3 </h1></td>
+                        </tr>
+                        <tr>
+                            <td width="20%">2</td>
+                            <td width="30%">3</td>
+                            <td width="40%">4</td>
+
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+            </tbody>
+        </table>
+    </table>
+    <div style="color: aquamarine; background-color: black; padding:20px">
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime reiciendis a est, sit doloribus adipisci ab expedita quos fuga, quae eveniet aliquam, sint vero natus alias repellendus voluptatem eum quia!</p>
+
+    </div>
+    <!-- we wil apply this to the div -->
+    <style>                 
+        .uppercase{ 
+            text-transform:uppercase ;
+        }
+    </style>
+    <!-- we wil apply this to the p -->
+    <!-- i could have put them in the same style element just different classes -->
+    <style>                 
+        .underline{ 
+            text-decoration:underline ;
+        }
+    </style>
+    <div class=" uppercase">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas pariatur vero amet odio cum. Soluta aspernatur quidem assumenda eveniet, non illum quas? Dolor incidunt eos temporibus repudiandae quos sunt delectus.</div>
+    <p class="underline">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto cupiditate deleniti veniam non aspernatur impedit tenetur porro, architecto voluptas natus dolores dolorem ullam optio aliquam repudiandae alias dicta dolorum error?</p>
+    <div class="uppercase underline" > wow forgot to put some test so it didn't show up</div> <!--wow forgot to put some test so it didn't show up :|-->
+    &lt; b &gt; this is bold &lt; b/ &gt;
+    &copy; 2022
+    <form action="" method="get">
+        <h1>tell us about you</h1>
+        <div>
+            enter your name
+            <br>
+            <input required name="First name" type="text">
+        </div>
+        <div>
+            tell us about you
+            <br>
+            <textarea required name="Personality" cols="30" rows="10" placeholder="introduce yourself"></textarea>
+        </div>
+        <div>
+            select yout option
+            <br>
+            <select name="the option" id="">
+                <option value="value1" disabled="disabled"> N/A</option>
+                <option value="value2">1</option>
+                <option value="value3">2</option>
+                <option value="value4">3</option>
+                <option value="default" selected="selected">this the defalut</option>
+            </select>
+        </div>
+        <div>
+            <button type="submit" >submit</button>
+        </div>
+
+
+    </form>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/8D7FZoQ-z20?si=rhryNocz1nVfWgYM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</body>
+</html>

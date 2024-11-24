@@ -1,0 +1,71 @@
+body {
+  min-height: 5000px;
+  margin: 0; /*remember this*/
+}
+
+div {
+  color: aliceblue;
+  width: 500px;
+  height: 100px;
+}
+
+.one {
+  background-color: red;
+  position: absolute; /*remember relative the element moves from its original place to the specified one
+  but absolute it's like you give it coordinates*/
+  /*top: 20px; /*top and left overcome the other two if they were mentioned together*/
+  right: 100px;
+  bottom: 20px;
+  /* When you set an element to position: absolute with bottom: 0px, and its parent is the viewport, 
+  the element will be positioned at the bottom of the visible viewport, 
+ not the bottom of the entire document. If the content of the page extends beyond 
+ the initial viewport height, scrolling won't affect the position of the absolutely positioned element relative to the viewport.*/
+}
+
+.two {
+  background-color: green;
+  width: 1000px;
+  height: 400px;
+  position: relative;
+}
+
+.three {
+  background-color: blue;
+  position: absolute; /*you need to put the absolute element in the parent element that is relative or else 
+  it's still to the viewport*/
+  top: 0px;
+  right: 30px;
+}
+
+.four {
+  background-color: bisque;
+  position: fixed; /*remember in all you have to provide coordinates*/
+  right: 20px; /*the coordinates here relative to the viewport and which the element will remain on */
+  top: 40px;
+  bottom: 20px; /*still doesn't work*/
+}
+
+.five {
+  background-color: blueviolet;
+  display: inline-block;
+  position: sticky; /*remember in all you have to provide coordinates*/
+  top: 40px;
+  bottom: 30px; /*still doesn't work*/
+  right: 40px; /*for initial position it acts completely like relative but top doesn't work */
+  left: 40px;
+  margin: 0; /*idk why they are not totally close to each other*/
+}
+
+/*sticky only stick to the top so if not given a top it won't stick*/
+/*at first stick react as relative so for example here you can't give it a right or bottom at first because it's incapable look at div 
+six example to understand relative better*/
+.six {
+  background-color: aquamarine;
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  /*right: 4px; /*see now relative moves right*/
+}
+
+/*need to try the margin with the position 
+need to know how to setup the initial position of the sticky elements*/

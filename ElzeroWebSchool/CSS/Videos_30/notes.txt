@@ -1,0 +1,7 @@
+if an element takes the absoulte position it's not considered in the page by the other elements and you have to give him the position otherwise 
+the margin can affect it 
+position relative make the element move according to itself and it is considered by other elements 
+absolute like we mentioned and it moves according to the parent thats position is relative and if there is no parent the parent is the page
+sticky reaches a specific position and then remain at its place and you give it the coordinates 
+all position types you need to provide coordinates
+the default value of position is static which don't move the elements even if you provide coordinates

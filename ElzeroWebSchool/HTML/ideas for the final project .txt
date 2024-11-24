@@ -1,0 +1,5 @@
+make a good layout and center some stuff 
+use the text formmating to emphasize different meanings like copyrights and important text 
+make a gallery of photos
+go to top
+make sidebar with tabs

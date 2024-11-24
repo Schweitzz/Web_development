@@ -1,0 +1,49 @@
+when you try to use a variable indicated in the declaration of the fn but you didn't pass it will give you undefined
+return interrupt the execution of the fn
+
+if you have multiple parameters and don't use them of course the undefined won't show up 
+to overcome this undefined problem you use either if condtion or make a defualt value by the or statment
+
+the new line is called the line terminator
+
+you can only use one rest parameter per function and it must be at last
+
+you can call and use the function before its definition
+
+so fn in js doesn't has a declaration doesnt' use return type in function or in parameters
+
+anonymus functions cannot be called before its definition as the variable is not declared it 
+anonymus fn is made for one use function so you'll not be using that name again so you don't need it just run it for example a button that 
+is doing something specific so you just make its function in the event handiling code
+anonymus functions are used with higher order functions
+also the function can be passed as a variable so it get executed when event happens this where its variable name comes in but for both cases i don't have to use a variable name
+
+you can put a function call instead of a variable in the template literal
+a function call anywhere also in return will result in some return of its own so it just get translated 
+`${function call}`
+
+for arrow fn you may remove the curly braces and the return if you have only one statment but if you have multiple you need both 
+arrow fn can be without parameters or with without you may put_ instead of the () and when one you may remove it as well 
+but for more than one parameter you need the braces
+when you use the function as a parameter you don't even have to assign it to a variable this applies for both arrow and anonymous
+
+fn search for the variables inside it first so if there is local variable and gloabal variable with the same name it will use the local one
+if the variable wasn't there or in global it will give variable is not defined but when it find it
+*** but it's position is wrong will give you not initialized yet
+
+arrow functions can't be hoisted meaning used before definition
+***the way you define a function to a variable is called function experssion
+
+lexical scope meaning that the child see the scope of outter scopes but the versa is wrong
+
+
+
+
+
+
+
+
+
+
+
+.

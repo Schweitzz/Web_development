@@ -1,0 +1,9 @@
+div {
+    height: 800px;
+    background-image: url("../astemir-almov--kgrPSetNW8-unsplash.jpg");/*this is and important note notice that 
+    we're in the css file that is in the css folder so you work your path from there
+    */
+    background-repeat: no-repeat;
+    background-color: blue;
+    background-size: cover;
+}

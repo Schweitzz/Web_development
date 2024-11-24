@@ -1,0 +1,40 @@
+div.one,
+div.two {
+  color: wheat;
+  width: 500px;
+  height: 100px;
+}
+
+.one {
+  background-color: aqua;
+  position: relative;
+  top: 80px;
+  /*z-index: -1;*/
+}
+
+.two {
+  background-color: red;
+  /*position: relative;*/
+}
+
+p {
+  width: 500px;
+  position: relative;
+}
+
+p:hover {
+  background-color: red;
+}
+
+p::first-line {
+  background-color: green; /*instead of putting the first line in a span you can use this*/
+  z-index: -1; /*didn't work*/
+}
+
+p::selection {
+  background-color: yellow;
+}
+
+::selection {
+  background-color: blue; /*it's like you've put all page in a div*/
+}

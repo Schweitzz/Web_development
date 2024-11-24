@@ -1,0 +1,10 @@
+remmember the swap trick to convert the sting into an array : arr.split("") and then join("") to turn it into a string again
+notice some time it won't recognize a function just because it only accept different datatype
+
+in reduce fn the acc is the first element **in the first iteration** and the current is the second unless intial value is provided
+then the acc will be the returned value of each time till you get the last return
+unlike the map and filter the reduce fn only return one value not a whole array wether it's the same length as the map or filtered as filter 
+***very imp note in reduce or other fn the return only happens once but what is written above is all in the iteration
+
+so the different in forEach is that it loops and make something not bring new array or value
+note that when he use this it applies only for the element clicked but when he used ele the loops goes on all

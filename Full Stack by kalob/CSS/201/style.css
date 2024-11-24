@@ -1,0 +1,280 @@
+body{
+    margin: 0;
+    padding: 0;
+    height: 10000px;
+}
+div.first{
+    padding: 5px;
+    margin: 5px;
+    display: inline-block;
+    border: red solid 1px;
+    position: relative; /*so i had a problem here that i had before in the project when you have multiple inline block elements 
+    if you specify a height for one of them all will have the same height as long they are all on the same line and the more you write on 
+    them the more they will go up and i have an element that are big so you have to use inline block so the solution is to use position */
+    bottom: 400px;
+    
+}
+.second{
+    padding: 5px;
+    margin: 6px;
+    display: block;
+    border: red solid 1px;
+}
+.box{
+    border: 6px solid black; /*look how the browser renders this 6 and it seems to like the multipliers of 4*/
+    padding: 30px;
+    height: 400px;
+    width: 300px;
+    box-sizing: border-box;
+    outline: 5px solid black;
+    outline-offset: 5px; /*notice that the outline doesn't appear in the browser control */
+    text-shadow: 2px 2px 3px black;
+    display: inline-block;
+    overflow:auto;
+}
+.position1{
+    position: relative; /*look how it overlaps with the element underneath it even though it's block that's because you moved it*/
+    top: 50px; 
+    right: 120px; /*and some of them has precedence over the others you can see when right is written after or before left left is the one executes*/
+    left: 100px; /*note that the word you use it adds like a padding to that direction not like it moves in that direction*/
+    bottom: 30px;/*so whenever you use one of them you can't use the other it won't have a change*/
+    border: 1px red solid;
+    width: 300px;
+    height: 300px;
+    margin: 5px;
+    display: block;
+    overflow: auto;
+}
+.position2{
+    border: red 1px solid;
+    float:right; /*i want to make this child float*/
+    position: absolute;
+    top: 50%; /*you can use 50% and it start at exactly the half*/
+    bottom: 20px; /*when adding the bottom here it have the affect of padding*/
+    right: 10px; /*you can use this trick to get all the way to the right*/
+    /*left: 20px;*/ /*so also here the left and top dominates*/
+    width: 50%; /*whenever you use the percent with the width or height it acts according to the parent element */
+    font-size: 40px;
+    
+}
+.header{
+    background-color: antiquewhite;
+    border-bottom: 1px solid #ccc;
+    position: fixed;
+    top: 0;
+    left:0;
+    width: 100%;
+    padding: 10px;
+}
+#parent .child{
+    border: 1px solid red;
+    height: 20px;
+}
+#parent > .child{
+    border: 1px solid blue;
+    height: 20px;
+}
+#parent .child+.child{
+    border: 1px solid turquoise;
+    height: 20px;
+}
+
+#parent .child ~.child{
+    border: 1px solid black;
+    height: 20px;
+}
+#parent2 .child2{
+    border: 1px solid red;
+    height: 20px;
+}
+.child2:not(.except_me){
+    background-color: blue;
+    .child2:hover{        /*this approach didn't work you have to put the not first*/
+        background-color: blanchedalmond;
+    }
+}
+.child2:hover{
+    background-color: blanchedalmond;
+}
+.child2:nth-child(4){
+    background-color: red;
+}
+p.pseudo::before{
+    content: 'this is ';
+    background-color: blueviolet;
+    color: chocolate;
+}
+p.pseudo::after{
+    content: 'this is not ';    /*so it appears that pseudo after doesn't support nesting*/
+    background-color: blueviolet;
+    color: chocolate;
+}
+.button{
+    background-color: white;
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+    border: 2px black solid;
+    border-radius: 2px;
+    padding: 5px 15px;
+    margin: 10px auto ;
+    transition: background-color 0.4s,
+    color 0.4s;
+}
+.button:hover{
+    background-color: black;
+    color: aliceblue;
+}
+.gradient{
+    border: 1px solid #00d4ff;
+    background: rgb(2,0,36);
+    background: linear-gradient(43deg, rgba(2,0,36,1) 0%, rgba(11,11,239,1) 91%, rgba(0,212,255,1) 100%);
+    width: 300px ;
+    height: 300px;
+}
+.background{
+    background-image: linear-gradient(180deg,rgba(0,0,0,0.3) 0% ,rgba(0,0,0,0.8) 100% )
+    ,url(pexels-kateryna-babaieva-2760344.jpg);
+    width: 100%;
+    height: 1000px;
+    position: relative;
+}
+.text{     /*trying to control the position of the text*/
+    color: aliceblue;
+    text-align:center ;
+    font-size: 30px;
+    text-transform: capitalize;
+    /*so the position is good also the transform but transform doesn't need to specify the parent*/
+    /*first is padding*/
+    /*padding-top: 100px;
+    padding-left: 450px;*/
+    /*second is position note that you have to define the parent element*/
+    position: absolute; /*even if the child is nested you have to say relative in the parent*/
+    top: 50px;
+     /*the div is around 1500 and the div for text is 600 so you need 450 the formula is (1500-600)/2 
+    but of course this way is not responsive if you change the text*/
+     /*third way*/
+    /* margin-top: 100px; 
+    margin-left: 450px; */ /*it's really bad*/
+    /*fourth way*/
+   /*transform: translateY(100px);*/
+   font-family: "Poetsen One", sans-serif;
+    
+}
+.animated{
+    border: 2px black solid;
+    background-color: turquoise;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    animation-name:slideMe ;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-direction:alternate ;
+}
+@keyframes slideMe { /*change the percentages so you can give each one the time you want*/
+    0%{
+        top: 0%;
+        left: 0%;
+    }
+    30%{
+        top: 0%;
+        left: calc(100% - 34px);
+     }
+     45%{
+        top: calc(100% - 32px);
+        left: calc(100% - 34px); /*would you look at that and subtract 2* the border width*/
+     }
+     70%{
+        top: calc(100% - 32px);
+        left: 0%;
+     }
+     100%{
+        top: 0%;
+        left: 0%;
+     }
+}
+#container{
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+.flexis1{
+    flex-basis: 20%;
+    border: black 1px solid;
+    flex-shrink: 0;
+    flex-grow: 0;
+    box-sizing: border-box;
+}
+
+.flexis2{
+    flex-basis: 80%;
+    border: black 1px solid;
+    flex-shrink: 0;
+    flex-grow: 0;
+    box-sizing: border-box;
+}
+
+.flexis3{
+    flex-basis: 30%;
+    border: black 1px solid;
+    flex-shrink: 0;
+    flex-grow: 0;
+    box-sizing: border-box;
+
+}
+#container2>*{
+    box-sizing: border-box;
+}
+#container2{
+    display: flex;
+    flex-wrap: wrap;
+}
+.header2{
+    flex-basis: 100%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    background-color: #555777;
+    color: aliceblue;
+    padding-top: 15px;
+    padding-left: 30px;
+    border-bottom: solid black 2px;
+    height: 50px;
+}
+.sidepanel{
+    padding-top: 15px;
+    padding-left: 30px;
+    flex-basis: 15%;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+.content{
+    flex-basis: 85%;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+#boxy{
+    height: 300px;
+    padding: 30px;
+    border: 1px solid black;
+    margin: 20px;
+    /*box-sizing: border-box;*/
+}
+#grid{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    /*column-gap: 10px;*/
+    gap: 10px 10px;
+}
+.griditem{
+    border: 1px red solid;
+    
+}
+#grid>:nth-child(5){
+    grid-row-start: 2;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-end: 4;
+}

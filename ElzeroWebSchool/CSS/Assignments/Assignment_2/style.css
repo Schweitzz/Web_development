@@ -1,0 +1,59 @@
+div{
+    color: white;
+    width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgb(138, 43, 226);/*#8A2BE2     RGB:138, 43, 226 HSL:248°, 76%, 60%*/
+}
+
+.assign-1-shape-2{
+    background-color: rgb(138, 43, 226,0.5);
+}
+
+.assign-1-shape-3{
+    background-color: rgb(138, 43, 226,0.1);
+}
+
+.div2{
+    width: 400px;
+    height: 500px;
+    background-image: url(square_grid.png);
+}
+
+.assign-2-shape-1{
+    background-repeat: no-repeat;
+    background-size: 80% 80%;
+}
+
+.assign-2-shape-2{
+    background-repeat: repeat-y;
+   /*background-position: top right;*/
+   background-size: 80% 80%;
+   background-position:  right;
+}
+
+.assign-2-shape-3{
+    background-repeat: repeat-x;
+   /* background-position: 0% 100% ;*/
+   background-size: 80% 80%;
+   background-position: 0% 100%
+}
+
+.assign-2-shape-4{
+    /*background-repeat: repeat;*/
+    background-repeat: no-repeat;
+    background-size: 25% 25%;
+    background-position: 100% 100%;
+}
+.element{
+    border: 5px red solid;
+    display: inline;
+    color: black;
+    background-color: white;
+    outline: 5px black solid;
+}
+.element-2{
+   border-color: red green blue;
+}
+
+/*assignment 3*

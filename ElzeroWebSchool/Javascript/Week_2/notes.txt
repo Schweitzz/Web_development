@@ -1,0 +1,56 @@
+float numbers also has the type number there is no such int or float
+its name is array but its type is object
+null has the type object 
+
+in javascirpt an html element with a given id is considered an object nested in the window object like the idea of matlab you can use it in the logic
+with var you can access the variable before definition but it gives undefined let or const gives and error
+var assign any variable declared with it to the window object which can cause scope drama
+you can define the variable without var or let as it to be a property of the window object but another variable can be defined with
+the same name so this will cause an overwrite
+
+as of css where you can use - or _ at the start or any place of the identifier name you can in js use $ or _
+
+due to the hoisting critiria of var keyword undefined appear when you use it before declaration but just use let it's way better
+
+you can mix between single quotes and double if you want to show one of them 
+you can use the escape operator to show a specific char like \" or \\ etc.
+\also escape for the new line meaing it make you able to write the code on multiple lines
+
+you can use comman with console.log to write concatenate strings
+template literal make you write exactly like you want unlike the console which is like the C in terms of new line and escape sequences and even 
+space only exception is the backslash /*but this works only with console but for displaying in the page it doesn't work*/
+`  -->backtick
+with template literal what you write is what is literally outputted
+type of NAN is number NAN is returned when you try to substract a string from a number
+
++unary opertaor return the number as it is and can cast the string
+
+type correction in js string turns into a number if they put together unless it's a + with a number for ex. 10+"osama" : 10osama
+but any thing else with the string will give you NaN 
+10-"10" or even "10"-10 will be 0 so don't look at it as it's the unary operator who is doning all the job 
+""-2 will be -2 as "" is 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.

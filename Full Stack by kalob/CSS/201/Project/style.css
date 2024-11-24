@@ -1,0 +1,80 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color: black;
+    color: white;
+    height: 3000px;
+}
+/**************************************start navigation styling********************************/
+.nav{
+    display: flex;
+    position: fixed;
+    width: 100%; /*don't forget this*/
+    height: 80px;
+    background-color: transparent;
+    margin-bottom: 50px;
+}
+.nav>*{
+    border: white 1px solid;
+    box-sizing: border-box;
+}
+.logo{ /*so i had a logical error that i put the menu elements in the logo and it made a lot of problems*/
+    
+    flex-basis: 25%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding-top: 15px;
+    padding-left: 125px;
+    box-sizing: border-box;
+}
+/*********************start menu styling**********************/
+.menu{
+    display: flex;
+    flex-basis: 38%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    /*padding-top: 10px;*/ /*if you center don't use padding*/
+   /* justify-content: center;*/ /*center elements in the center of flex item*/
+   align-items: center;
+}
+.menu>*{
+    box-sizing: border-box;
+    text-align: center;
+    /*align-items: center;*/ /*put it in the parent honey*/
+}
+.products
+{
+    flex-basis: 15%;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+.pricing{
+    flex-basis: 15%;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+.affiliate{
+    flex-basis: 15%;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+.apis{
+    flex-basis: 15%;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+/*********************end menu styling**********************/
+.sign_in{
+    flex-basis: 37%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding-top: 10px;
+}
+/**************************************end navigation styling********************************/
+.header_break{
+    /*position: absolute;         /*using position here other element will overwrite remember>*/
+    /*top: 100px;*/
+   /* margin-top: 200px;*/
+    height: 100px;
+    width: 100%;
+}

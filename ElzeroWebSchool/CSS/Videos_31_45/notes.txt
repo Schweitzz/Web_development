@@ -1,0 +1,35 @@
+z index takes the order of elements meaning if they or all on top of each other the last will appear
+z-index doesn't work without the element given a position 
+when you consider z-index you consider the order in html as well
+z index:-1 takes the last z position
+very important note the html order only works if all of them took a position
+
+in CSS classes can be considered as a fn we've seen the clear class now the reset lists class
+list-style we have type position img 
+shorthand property is the format of the property that combines its subs in one line
+
+remember that table consists of multiple html element you can customize it with them
+
+pseudo means fake 
+pseudo classes are alot some of them are general and other for specific elements 
+a-> hover visited 
+input(type checkbox)->checked
+general-> empty ,focus
+
+you can force a state with chrome developer tools so you don't have to simulate the state to see the feedback
+Pseudo-elements are used to style specific parts of an element or to insert content before or after the content of an element.
+so they are fake elements but give us the ability to add some style without the need to add elements for example first letter 
+pseudo element is like you have put the first letter of the element in span then you syle it
+these are really helpful when you don't have access to the html or the data comes from the database and it's harder with js to select the needed
+part and insert the required html element
+as classes are like fn in css so pseudo class is a function that happen at specific event
+
+for after and before pseudo elements you have to add content property
+look at the arrow trick
+
+
+
+
+
+
+assignments left the last two of 30_33

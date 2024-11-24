@@ -1,0 +1,6 @@
+== only comapare the value even if the types are not the same
+===compares also with the types (identical operator)
+
+falsy values are like 0 "" null undefined false 
+negatives values are true
+nullish coaliscing only care about null and undefined and it goes by the symbol ??

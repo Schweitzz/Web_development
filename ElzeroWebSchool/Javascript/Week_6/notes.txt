@@ -1,0 +1,11 @@
+This is the array+loops week 6 and 7 
+in js you just create the arr even if it's a 3d array it make it without you specifing that
+just a string is not considered an array 
+you can check if the variable is array by the method isArray
+template litteral converts the varibles into string :the array will be converted to a string using its default toString() method, which joins the elements of the array with commas. So, the array will be shown as a comma-separated string.
+
+arrays here are so dynamic
+
+array methods return undefined if the array is empty
+strings in js are immutable and cannot be changed once created also the methods deal with the value not the reference kinda like the embedded
+where strings are stored in the ro data and from all of this that's why strings are not array 

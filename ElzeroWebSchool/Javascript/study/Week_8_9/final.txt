@@ -1,0 +1,545 @@
+/*****************************************/
+/******** Name: kareem amr ahmed  ********/
+/******** Date: 9/2/2024          ********/
+/******** File: Back microcontroller *****/
+/*****************************************/
+
+/*libraries inclusion*/
+#include <mcp_can.h>
+#include <SPI.h>
+
+
+/*defining arduino pins*/
+#define trigPin1  9 // Trigger pin for Sensor 1
+#define echoPin1  8 // Echo pin for Sensor 1
+/*#define trigPin2  6 // Trigger pin for Sensor 2
+#define echoPin2  7 // Echo pin for Sensor 2
+#define trigPin3  4 // Trigger pin for Sensor 3
+#define echoPin3  5  // Echo pin for Sensor 3*/
+#define brakingLights 3
+#define rightBlinker 7
+#define reverseLights 4
+#define leftBlinker 5
+
+#define currentSensorPin1 A1  //voltage sensor input signal
+#define currentSensorPin2 A4  //current sensor input signal
+#define currentSensorPin3 A5  //voltage sensor input signal
+#define currentSensorPin4 A6  //current sensor input signal
+
+
+/*define the messages ids you want to receive and send */
+#define MsgReceived_ID1          (0x190) // gets the state of braking from the front
+#define MsgReceived_ID2          (0x120) // gets the value of the rpm of the left motor to check if the car is in reverse
+#define MsgReceived_ID3          (0x130) // gets the value of the rpm of the right motor to check if the car is in reverse
+#define MsgReceived_ID4          (0x150) // get the value of the blinkers and the turning programs form the steering
+#define MsgReceived_ID5          (0x180) // gets the hazard value from the dashboard
+#define MsgReceived_ID6          (0x140) // gets the distance travelled from the EDL module
+
+#define MsgSend_ID1              (0x170)
+
+
+/*delay time */
+#define dt 100
+#define BATTERY_CAPACITY_AH 80.0
+/* functions delclarations*/
+void measureDistance(int trigPin, int echoPin, int &distance); //for ultrasonic
+void printToSerial(void); //used for debugging
+void setupPins(void); //setup each pin as an input or output pin
+void measureVoltageCurrent(void);  // get the values of the voltage and current sensors and map it 
+void controlLights(void);  // interfaces with the lights ports in the pcb providing logic to control its behavior
+void calc_SOC(float currentA);
+void calc_range(char SOC,float distance_travelled,float sumCurrent);
+
+// Variables to store distance and duration for each sensor
+long duration1, duration2, duration3;
+int distance1, distance2, distance3;
+
+// variables to get voltage and current sensor readings
+float voltageReading=0,currentReading=0;
+
+// variables to control the lights
+char rightBlinkerValue=0,leftBlinkerValue=0,reverseLightsValue=0;
+byte brakingLightsValue=0;
+
+float sumCurrent=0;
+float SOC=100.0;
+const float VCC = 5.0; // Supply voltage
+const float V_OFFSET = 2.1; // Offset voltage (no current)
+const float SENSITIVITY = 0.009; // Sensitivity (V/A) for ACS758-50B
+
+unsigned long previousMillis = 0;  // Variable to store the last time LED was updated
+const long interval = 500;
+unsigned long currentMillis=0;
+
+unsigned long previousMillissend = 0;  // Variable to store the last time messege was sent
+const long intervalsend = 30;
+unsigned long currentMillissend=0;
+
+unsigned long currentMillis_SOC = 0;
+unsigned long previousMillis_SOC=0;
+const unsigned long interval_SOC = 1000;
+//CAN bus variables
+long unsigned int rxId;
+unsigned char len = 0;
+unsigned char rxBuf[8];
+
+unsigned short TempSend=1;
+
+//debugging value to see if there any drop in the messages
+char x=0;
+
+/*array to be send*/
+char sendData[8] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+
+/*receiving variables*/
+signed short L_RPM =0 ;
+signed short R_RPM =0;
+
+char hazardFlag=0;
+
+float range=0, battery_capcity = 2048, power_consumed_KM=1, distance_travelled = 0;
+
+char MAX_range=20;
+double voltage[11][2] = {(27.2,100), (26.8,99), (26.6,90), (26.4,70), (26.2,40), (26.0,30), (25.8,20), (25.6,17), (25.0,14), (24,9), (20,0)} ;
+// setting pin 10 as the cs for the can transciver
+MCP_CAN CAN0(10);     // Set CS to pin 10
+
+void setup() {
+  // Initialize serial communication for debugging
+  Serial.begin(115200);
+  /*if(*/CAN0.begin(MCP_STDEXT, CAN_500KBPS, MCP_16MHZ); /*== CAN_OK) Serial.println("MCP2515 Initialized Successfully!");
+  else Serial.println("Error Initializing MCP2515...");*/
+  pinMode(2, INPUT); 
+  /*CAN0.init_Mask(0,0,0x7FF);                // Init first mask...
+  CAN0.init_Filt(0,0,0x103);       */         // Init first filter...
+                // Init sixth filter...
+  CAN0.setMode(MCP_NORMAL);   // Change to normal mode to allow messages to be transmitted
+  
+  // Set all pins of the arduino
+  setupPins();
+  
+  //randomSeed(analogRead(A5)); // Seed the random number generator with an analog pin's value
+  
+
+}
+
+void loop() {
+  //Serial.print("hello");
+   currentMillis = millis();
+   currentMillissend=millis();
+
+   /********************************************************receiving***********************************************/
+   if(1)                    // If pin 2 is low, read receive buffer
+    {
+      CAN0.readMsgBuf(&rxId, &len, rxBuf); // Read data: len = data length, buf = data byte(s)
+        switch(rxId)
+      {
+        case MsgReceived_ID1:
+        /*knowing the structure of the incoming message i can choose which rxBuf element that has my variable value*/
+       /* brakingLightsValue=(float)((rxBuf[0]<<8)|rxBuf[1])/10.0;
+        if(brakingLightsValue>0)
+        {
+          brakingLightsValue=1;
+        }*/
+        brakingLightsValue=rxBuf[4];
+        /*Serial.println("message recievied id 0x190");
+        Serial.println(brakingLightsValue);*/
+        break;
+
+        case MsgReceived_ID2:
+        /*knowing the structure of the incoming message i can choose which rxBuf element that has my variable value*/
+        L_RPM= ((signed short)rxBuf[3]<<8)|rxBuf[4];
+        /*Serial.println("message recievied id 0x120");
+        Serial.println(L_RPM);*/
+        break;
+
+        case MsgReceived_ID3:
+        /*knowing the structure of the incoming message i can choose which rxBuf element that has my variable value*/
+        R_RPM= ((signed short)rxBuf[3]<<8)|rxBuf[4];
+        /*Serial.println("message recievied id 130");
+        Serial.println(R_RPM);*/
+        break;
+
+        case MsgReceived_ID4:
+        /*knowing the structure of the incoming message i can choose which rxBuf element that has my variable value*/
+        rightBlinkerValue=rxBuf[1];
+        leftBlinkerValue=rxBuf[2];
+        /*L_take=rxBuf[4];
+        R_take=rxBuf[5];*/
+        /*Serial.println("message recievied id 150");
+        Serial.print(rxBuf[1]);
+        Serial.print("  ");
+        Serial.println(rxBuf[2]);*/
+        break;
+
+        case MsgReceived_ID5:
+        /*knowing the structure of the incoming message i can choose which rxBuf element that has my variable value*/
+        hazardFlag=rxBuf[0];
+       /* Serial.println("message recievied id 180");
+        Serial.println((int)hazardFlag);*/
+        
+        break;
+        case MsgReceived_ID6:
+        distance_travelled=(float)((rxBuf[5]<<8)|rxBuf[6])/10.0;
+        break;
+        default:
+        break;
+      }
+    }
+     
+    /********************************************************************************/
+  
+ controlLights();
+ 
+   
+  /*reading ultrasonic sensors and sending a CAN message*/
+  if( (L_RPM<0) ||  (R_RPM<0)  )
+  {
+    measureDistance(trigPin1, echoPin1, distance1);
+    sendData[0] = distance3;
+   /*Serial.print("Distance 1: ");
+  Serial.print(distance1);
+  Serial.println(" cm");*/
+    
+   /* measureDistance(trigPin2, echoPin2, distance2);*/
+    sendData[1] = distance3;
+          /*Serial.print("Distance 2: ");
+  Serial.print(distance2);
+  Serial.println(" cm");*/
+   /* measureDistance(trigPin3, echoPin3, distance3);*/
+    sendData[2] = distance3;
+   /*Serial.print("Distance 3: ");
+  Serial.print(distance3);
+  Serial.println(" cm");*/
+  
+  }
+  else
+  {
+    sendData[0]=0;
+    sendData[1]=0;
+    sendData[2]=0;
+  }
+
+
+  /*reading voltage and current sensors and sending a CAN message*/
+   measureVoltageCurrent();
+  calc_SOC(sumCurrent);
+  calc_range( SOC, distance_travelled,sumCurrent);
+  // printToSerial();
+ 
+  /*******************************************sending************************************************/
+  if (currentMillissend - previousMillissend >= intervalsend) {
+    previousMillissend = currentMillissend;  // Save the current time for the next comparison
+    byte sndStat1 = CAN0.sendMsgBuf(MsgSend_ID1, 0, 8, sendData);
+    if(sndStat1 == CAN_OK){
+    //Serial.println("Message Sent Successfully!");
+  } else {
+    //Serial.println("Error Sending Message...");
+  }
+  }
+  /***********************************************************************************************/
+}
+
+/****************functions implementation****************/
+
+void measureDistance(int trigPin, int echoPin, int &distance) {
+  // Trigger the ultrasonic sensor by sending a pulse
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  
+  // Measure the duration of the echo pulse
+  long duration = pulseIn(echoPin, HIGH,20000);
+
+  // Calculate the distance in centimeters
+  distance = duration * 0.034 / 2;
+  
+}
+void printToSerial(void)
+{
+   // Print the distance to the Serial Monitor
+  /*may add function to alert from specific side*/
+  for(int i=0;i<8;i++)
+  {
+    Serial.print((int)sendData[i]);
+    Serial.print("   ");
+  }
+  
+   Serial.println("   ");
+}
+void setupPins(void)
+{
+   // Set trigPin as an OUTPUT and echoPin as an INPUT for each sensor
+  pinMode(trigPin1, OUTPUT);
+  pinMode(echoPin1, INPUT);
+  /*pinMode(trigPin2, OUTPUT);
+  pinMode(echoPin2, INPUT);
+  pinMode(trigPin3, OUTPUT);
+  pinMode(echoPin3, INPUT);*/
+
+  //pinMode(voltageSensorPin,INPUT);
+ 
+
+  pinMode(rightBlinker,OUTPUT);
+  pinMode(leftBlinker,OUTPUT);
+  pinMode(brakingLights,OUTPUT);
+  pinMode(reverseLights,OUTPUT);
+
+  pinMode(currentSensorPin1,INPUT);
+  pinMode(currentSensorPin2,INPUT);
+  pinMode(currentSensorPin3,INPUT);
+  pinMode(currentSensorPin4,INPUT);
+  //pinMode(A5,OUTPUT);
+}
+void measureVoltageCurrent(void)
+{
+  // Read the sensor voltages
+  float voltage1 = analogRead(currentSensorPin1) * (VCC / 1023.0);
+  float voltage2 = analogRead(currentSensorPin2) * (VCC / 1023.0);
+  float voltage3 = analogRead(currentSensorPin3) * (VCC / 1023.0);
+  float voltage4 = analogRead(currentSensorPin4) * (VCC / 1023.0);
+  Serial.println(voltage1);
+  Serial.println((voltage2));
+  Serial.println((voltage3));
+  Serial.println((voltage4));
+ 
+  // Convert the voltages to current values
+  float current1 = (voltage1 - V_OFFSET) / SENSITIVITY;
+  float current2 = (voltage2 - V_OFFSET) / SENSITIVITY;
+  float current3 = (voltage3 - V_OFFSET) / SENSITIVITY;
+  float current4 = (voltage4 - V_OFFSET) / SENSITIVITY;
+  
+  Serial.print("Current Sensor 1: ");
+  Serial.print(current1);
+  Serial.println(" A");
+
+  Serial.print("Current Sensor 2: ");
+  Serial.print(current3);//has a problem 
+  Serial.println(" A");
+
+  Serial.print("Current Sensor 3: ");
+  Serial.print(current3);
+  Serial.println(" A");
+
+  Serial.print("Current Sensor 4: ");
+  Serial.print(current4);
+  Serial.println(" A");
+
+
+  sumCurrent=current1+current3+current3+current4;
+  /*const double alpha = 0.003;   // Adjust this value to change the filter strength Smaller values of alpha result in stronger filtering (smoother output), but also introduce more delay in response to changes in input.
+   float FilteredSpeed=0;
+   FilteredSpeed = alpha * sumCurrent + (1 - alpha) * FilteredSpeed;*/
+   if(sumCurrent<-1){
+    sumCurrent=-0.35;
+   }
+  Serial.print("sum of current is  ");
+  Serial.print(sumCurrent);
+  Serial.println(" A");
+    TempSend=sumCurrent*10;
+    sendData[5]=TempSend>>8; //hold the most signefecnt bits in the first byte
+    sendData[6]=TempSend; //hold the least signeficant bits in the second byte
+    delay(10); //with no delay it breaks
+}
+void controlLights(void)
+{
+   
+  if ((rightBlinkerValue==0)&&(leftBlinkerValue==1))
+    {
+      digitalWrite(rightBlinker,HIGH);
+      if (currentMillis - previousMillis >= interval) {
+    previousMillis = currentMillis;  // Save the current time for the next comparison
+
+    // Toggle the LED state
+    if (digitalRead(leftBlinker) == HIGH) {
+      digitalWrite(leftBlinker, LOW);
+    } else {
+      digitalWrite(leftBlinker, HIGH);
+    }
+  }
+    }
+    else if((rightBlinkerValue==1)&&(leftBlinkerValue==0)) 
+    {
+      digitalWrite(leftBlinker,HIGH);
+       if (currentMillis - previousMillis >= interval) {
+    previousMillis = currentMillis;  // Save the current time for the next comparison
+
+    // Toggle the LED state
+    if (digitalRead(rightBlinker) == HIGH) {
+      digitalWrite(rightBlinker, LOW);
+    } else {
+      digitalWrite(rightBlinker, HIGH);
+    }
+    }
+    }
+    else if(hazardFlag==1||((rightBlinkerValue==1)&&(leftBlinkerValue==1)))
+    {
+      if (currentMillis - previousMillis >= interval) {
+    previousMillis = currentMillis;  // Save the current time for the next comparison
+
+    // Toggle the LED state
+    if (digitalRead(rightBlinker) == HIGH) {
+      digitalWrite(rightBlinker, LOW);
+      digitalWrite(leftBlinker, LOW);
+    } else {
+      digitalWrite(rightBlinker, HIGH);
+      digitalWrite(leftBlinker, HIGH);
+    }
+    }
+    }
+    else
+    {
+      digitalWrite(rightBlinker,HIGH);
+      digitalWrite(leftBlinker,HIGH);
+    }
+
+  if( (L_RPM<0) ||  (R_RPM<0) )
+    {
+      digitalWrite(reverseLights,LOW);
+    }
+    else
+    {
+      digitalWrite(reverseLights,HIGH);
+    }
+
+  if(brakingLightsValue>=1)
+    {
+      digitalWrite(brakingLights,LOW);
+    }
+    else
+    {
+      digitalWrite(brakingLights,HIGH);
+    }
+    
+}
+void calc_SOC(float currentA)
+{
+  currentMillis_SOC= millis(); /*if error try to put it in the begining of the code */
+  if (currentMillis_SOC - previousMillis_SOC >= interval_SOC) {
+    previousMillis_SOC = currentMillis_SOC;
+    // Calculate the charge in Ah added or removed since the last update
+    float charge = currentA * (interval_SOC / 3600000.0);  // Convert ms to hours
+
+    // Update the SoC
+    SOC -= (charge / BATTERY_CAPACITY_AH) * 100.0;
+
+    // Constrain the SoC to be between 0 and 100%
+    SOC = constrain(SOC, 0.0, 100.0);
+
+    // Print the SoC
+    Serial.print("State of Charge: ");
+    Serial.print(SOC);
+    Serial.println("%");
+  }
+  char SOC_char=(char)SOC;
+
+  sendData[7]=SOC_char;
+}
+
+/*note to begin serial and to watch variables types*/ 
+void calc_range(char SOC,float distance_travelled,float sumCurrent){
+
+  if (distance_travelled == 0 )
+  {
+    range = MAX_range;
+    Serial.print("rangeTR0 = ");
+    Serial.println(range);
+  }
+  else{
+    if(SOC>99)
+    {
+      power_consumed_KM = (sumCurrent * voltage[0][0]) / distance_travelled; 
+      range = MAX_range -battery_capcity / power_consumed_KM;
+      Serial.print("rangeSOC100 = ");
+      Serial.println(range);
+    }
+    else if(SOC>=90 && SOC<=99)
+    {
+      power_consumed_KM = (sumCurrent * voltage[1][0]) / distance_travelled; 
+      range = MAX_range -battery_capcity / power_consumed_KM;
+      Serial.print("rangeSOC99 = ");
+      Serial.println(range); 
+    }
+    else if(SOC>=70 && SOC<90)
+    {
+      power_consumed_KM = (sumCurrent * voltage[2][0]) / distance_travelled; 
+      range =MAX_range - battery_capcity / power_consumed_KM;
+      Serial.print("rangeSOC90 = ");
+      Serial.println(range); 
+    }
+    else if(SOC>=40 && SOC<70)
+    {
+      power_consumed_KM = (sumCurrent * voltage[3][0]) / distance_travelled; 
+      range = MAX_range -battery_capcity / power_consumed_KM;
+      Serial.print("rangeSOC70 = ");
+      Serial.println(range); 
+    }
+    else if(SOC>=30 && SOC<40)
+    {
+      power_consumed_KM = (sumCurrent * voltage[4][0]) / distance_travelled; 
+      range = MAX_range - battery_capcity / power_consumed_KM;
+      Serial.print("rangeSOC40 = ");
+      Serial.println(range); 
+    }
+    else if(SOC>=20 && SOC<30)
+    {
+      power_consumed_KM = (sumCurrent * voltage[5][0]) / distance_travelled; 
+      range = MAX_range - battery_capcity / power_consumed_KM;
+      Serial.print("rangeSOC30 = ");
+      Serial.println(range); 
+    }
+    else if(SOC>=17 && SOC<20)
+    {
+      power_consumed_KM = (sumCurrent * voltage[6][0]) / distance_travelled; 
+      range = MAX_range - battery_capcity / power_consumed_KM; 
+      Serial.print("rangeSOC20 = ");
+      Serial.println(range);
+    }
+    else if(SOC>=14 && SOC<17)
+    {
+      power_consumed_KM = (sumCurrent * voltage[7][0]) / distance_travelled; 
+      range = MAX_range - battery_capcity / power_consumed_KM;
+      Serial.print("rangeSOC17 = ");
+      Serial.println(range); 
+    }
+    else if(SOC>=9 && SOC<14)
+    {
+      power_consumed_KM = (sumCurrent * voltage[8][0]) / distance_travelled; 
+      range = MAX_range - battery_capcity / power_consumed_KM;
+      Serial.print("rangeSOC14 = ");
+      Serial.println(range); 
+    }
+    else if(SOC>0 && SOC<9)
+    {
+      power_consumed_KM = (sumCurrent * voltage[9][0]) / distance_travelled; 
+      range = MAX_range - battery_capcity / power_consumed_KM;
+      Serial.print("rangeSOC9 = ");
+      Serial.println(range); 
+    }
+    else if(SOC==0)
+    {
+      power_consumed_KM = (sumCurrent * voltage[10][0]) / distance_travelled; 
+      range = MAX_range -battery_capcity / power_consumed_KM;
+      Serial.print("rangeSOC0 = ");
+      Serial.println(range); 
+    }
+    TempSend=range*10;
+    sendData[3]=TempSend>>8; //hold the most signefecnt bits in the first byte
+    sendData[4]=TempSend ;//hold the least signeficant bits in the second byte
+
+  //TODO get the linear readings within the given array
+
+
+}
+}
+
+
+
+
+  
+
+
+
+

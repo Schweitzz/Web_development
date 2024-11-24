@@ -1,0 +1,15 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+/*div.divy{
+    display: inline-block;
+    border: 1px black solid;
+    padding: 30px;
+    margin: 30px;
+}*/
+.try{
+    display: inline-block;
+    width: 50%;
+    box-sizing: border-box;
+}

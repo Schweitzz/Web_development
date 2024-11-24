@@ -1,0 +1,30 @@
+h1{
+    color: aqua;
+}
+body{
+    background-color: black;
+    color: aliceblue;
+}
+.real-input { 
+    border: 0;
+    border-bottom: 1px solid black;
+    display: inline-block;
+    width: 75px;
+    text-align: center;
+  }
+ .userInformation{
+    display: flex;
+    width: 100px;
+}
+.flexCatagory{
+    flex-basis: 20px;    /*css to be corrected */
+    flex-grow: 0;
+    flex-shrink: 0;
+    display: inline-block;
+    width: 20px;
+}
+.flexValue{
+    flex-basis: 40px;
+    flex-grow: 0;
+    flex-shrink: 0;
+}

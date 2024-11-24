@@ -1,0 +1,2 @@
+each console log takes a new line so if you want to log things on the same line you can use .repeat()
+
