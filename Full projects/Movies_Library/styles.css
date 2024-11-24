@@ -1,0 +1,99 @@
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+  color: #333;
+}
+
+/* Header styles */
+header {
+  background-color: #007bff;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Main container styles */
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  background: white;
+}
+
+/* Search and results layout */
+.main-container {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 100px); /* Adjust for header height */
+}
+
+/* Search section */
+.search-section {
+  width: 40%;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-right: 2px solid #ddd;
+}
+
+.search-section h2 {
+  margin-bottom: 1rem;
+}
+
+.search-section label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.search-section input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.search-section button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-section button:hover {
+  background-color: #0056b3;
+}
+
+/* Error message */
+.error-msg {
+  color: red;
+  margin-top: 1rem;
+}
+
+/* Results section */
+.results-section {
+  width: 60%;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.movie {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #f9f9f9;
+}
+
+.movie h3 {
+  margin: 0;
+}
+
+.movie p {
+  margin: 0.5rem 0;
+}
